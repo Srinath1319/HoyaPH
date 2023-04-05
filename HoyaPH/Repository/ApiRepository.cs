@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HoyaPH.Repository
 {
-    public class ApiRepository:BaseRepository
+    public class ApiRepository : BaseRepository
     {
         ApiInterface apiInterface;
         public ApiRepository(ApiInterface apiInterface) : base(apiInterface)
@@ -19,10 +19,7 @@ namespace HoyaPH.Repository
 
         public async Task<int> getExistancyR(ExistancyRequest existancyRequest)
         {
-
-            //return await safeApiCall(() => Task.FromResult<dynamic>(apiInterface.getExistancy(existancyRequest)));
-
-            return await ApiCall( async () => await apiInterface.getExistancy(existancyRequest));
+            return await ApiCall(async () => await apiInterface.getExistancy(existancyRequest));
         }
     }
 }
