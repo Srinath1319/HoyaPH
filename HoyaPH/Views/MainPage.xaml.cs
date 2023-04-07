@@ -9,9 +9,13 @@ public partial class MainPage : ContentPage
 
 	public MainPage(MainPageViewModel mainPageViewModel)
 	{
-		InitializeComponent();
-		BindingContext = mainPageViewModel;
-	}
+        mainPageViewModel.Navigation = Navigation;
+        BindingContext = mainPageViewModel;
+        InitializeComponent();
+       
+
+
+    }
 
 	/*public void OnClicked(object sender, EventArgs e)
 	{

@@ -4,8 +4,12 @@
              xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
              NavigationPage.HasNavigationBar="False"
              BackgroundImageSource="login_bg.png"
-             x:Class="HoyaPH.MainPage">
+             x:Class="HoyaPH.MainPage"
+             xmlns:local="clr-namespace:HoyaPH.Test">
+
     <Grid RowDefinitions="150,130,*">
+
+
         <Image Grid.Row="0"
                Source="logo.png"
                HeightRequest="40"
@@ -41,7 +45,7 @@
                                    HeightRequest="50"
                                    BorderColor="White"
                                    Margin="20">
-                                <Entry Placeholder="Enter Membership ID / Mobile Number"
+                                <local:BorderlessEntry Placeholder="Enter Membership ID / Mobile Number"
                                        FontSize="13"
                                        FontFamily="Medium"
                                        PlaceholderColor="Gray"
@@ -52,17 +56,21 @@
                             <Frame BackgroundColor="White"
                                    CornerRadius="30"
                                    HeightRequest="50"
-                                   IsVisible="false"
+                                   IsVisible="{Binding Visiblity}"
                                    BorderColor="White"
                                    Margin="20,0,20,20">
-                                <Entry Placeholder="Enter OTP"
+
+                                <local:BorderlessEntry Placeholder="Enter OTP"
                                        FontSize="13"
+                                       Text="{Binding Otp}"
+                                       MaxLength="6"
+                                       Keyboard="Numeric"
                                        FontFamily="Medium"
                                        PlaceholderColor="Gray"
                                        TextColor="Black"
                                        HeightRequest="50" />
                             </Frame>
-                            <Button Text="Get OTP"
+                            <Button Text="{Binding BtnText}"
                                     Command="{Binding CheckExistancyCommand}"
                                     BackgroundColor="White"
                                     HorizontalOptions="Center"
@@ -123,4 +131,8 @@
             </StackLayout>
         </Border>
     </Grid>
+
+
+
+
 </ContentPage>
