@@ -26,23 +26,38 @@ namespace HoyaPH.Repository
         {
             TokenRequest = new FormUrlEncodedContent(KeyContent);
             var Token = await apiInterface.getToken(TokenRequest);
-
-            Console.WriteLine("TOKEN : " + Token.access_token);
+            Console.WriteLine("===============================================================================================================");
+            Console.WriteLine("                                                                                                               ");
+            Console.WriteLine(" <<-<<-<<- TOKEN : " + Token.access_token);
+            Console.WriteLine("                                                                                                               ");
+            Console.WriteLine("===============================================================================================================");
+           
             Preferences.Set("TOKEN", Token.access_token);
         }
 
         public async Task<T> ApiCall<T>(Func<Task<T>> request)
         {
+            
 
             try
             {
                 T result = await request();
+                Console.WriteLine("===============================================================================================================");
+                Console.WriteLine("                                                                                                               ");
+                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + result);
+                Console.WriteLine("                                                                                                               ");
+                Console.WriteLine("===============================================================================================================");
                 return result;
 
             }catch (ApiException ex) {
 
                 await RefreshToken();
                 T result = await request();
+                Console.WriteLine("===============================================================================================================");
+                Console.WriteLine("                                                                                                               ");
+                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + result);
+                Console.WriteLine("                                                                                                               ");
+                Console.WriteLine("===============================================================================================================");
                 return result;
 
             }

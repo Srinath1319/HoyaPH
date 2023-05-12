@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HoyaPH.Model;
 using HoyaPH.Repository;
+using HoyaPH.Test;
 using HoyaPH.Views;
 
 namespace HoyaPH.ViewModel
@@ -11,7 +12,7 @@ namespace HoyaPH.ViewModel
 
     {
         ApiRepository apiRepository;
-        ActivityIndicator activityIndicator = new ActivityIndicator();
+        
 
         public MainPageViewModel(ApiRepository apiRepository)
         {
@@ -31,6 +32,9 @@ namespace HoyaPH.ViewModel
         [ObservableProperty]
         Boolean visiblity;
 
+        [ObservableProperty]
+        Boolean enableMembershipID = true;
+
         public INavigation Navigation { get; internal set; }
 
         [RelayCommand]
@@ -49,7 +53,7 @@ namespace HoyaPH.ViewModel
                 }
                 else
                 {
-                    activityIndicator.IsRunning = true;
+                    AppController.getInstance().showLoadingDialog(App.Current.MainPage);
                     
                     ExistancyRequest existancyRequest = new ExistancyRequest
                     {
@@ -64,12 +68,12 @@ namespace HoyaPH.ViewModel
 
 
                     var response = await apiRepository.getExistancyR(existancyRequest);
-                    //activityIndicator.IsRunning = false;
-                    Console.WriteLine("RESPONSE_CHECK" + response);
+                    AppController.getInstance().hideLoadingDialog();
+                   
 
                     if (response == 1)
                     {
-
+                        EnableMembershipID = false;
                         Visiblity = true;
                         BtnText = "Submit";
                     }
@@ -117,6 +121,21 @@ namespace HoyaPH.ViewModel
 
         }
 
+
+        public bool OnBackPressed() {
+
+            if (Visiblity)
+            {
+                EnableMembershipID = true;
+                Visiblity = false;
+                BtnText = "Get OTP";
+                return true;
+            }
+            else {
+
+                return false;
+            }
+        }
 
     }
 }

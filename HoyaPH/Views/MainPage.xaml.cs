@@ -17,12 +17,21 @@ public partial class MainPage : ContentPage
 
     }
 
-	/*public void OnClicked(object sender, EventArgs e)
-	{
-        
-		Navigation.PushAsync(new DashboardPage());
-	}*/
+    protected override bool OnBackButtonPressed()
+    {
 
-    
+        if (((MainPageViewModel)(BindingContext)).OnBackPressed())
+        {
+
+            ((MainPageViewModel)(BindingContext)).OnBackPressed();
+            return true;
+        }
+        else {
+            return base.OnBackButtonPressed();
+        }
+        
+        
+    }
+
 }
 

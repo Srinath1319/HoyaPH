@@ -51,6 +51,7 @@
                                        PlaceholderColor="Gray"
                                        TextColor="Black"
                                        HeightRequest="50" 
+                                                       IsEnabled="{Binding EnableMembershipID}"
                                        Text="{Binding Text}"/>
                             </Frame>
                             <Frame BackgroundColor="White"
