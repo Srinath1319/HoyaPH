@@ -4,12 +4,10 @@
              xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
              NavigationPage.HasNavigationBar="False"
              BackgroundImageSource="login_bg.png"
+             
              x:Class="HoyaPH.MainPage"
              xmlns:local="clr-namespace:HoyaPH.Test">
-
     <Grid RowDefinitions="150,130,*">
-
-
         <Image Grid.Row="0"
                Source="logo.png"
                HeightRequest="40"
@@ -45,14 +43,14 @@
                                    HeightRequest="50"
                                    BorderColor="White"
                                    Margin="20">
-                                <local:BorderlessEntry Placeholder="Enter Membership ID / Mobile Number"
+                                <Entry Placeholder="Enter Membership ID / Mobile Number"
                                        FontSize="13"
                                        FontFamily="Medium"
                                        PlaceholderColor="Gray"
                                        TextColor="Black"
-                                       HeightRequest="50" 
-                                                       IsEnabled="{Binding EnableMembershipID}"
-                                       Text="{Binding Text}"/>
+                                       HeightRequest="50"
+                                       IsEnabled="{Binding EnableMembershipID}"
+                                       Text="{Binding Text}" />
                             </Frame>
                             <Frame BackgroundColor="White"
                                    CornerRadius="30"
@@ -60,8 +58,7 @@
                                    IsVisible="{Binding Visiblity}"
                                    BorderColor="White"
                                    Margin="20,0,20,20">
-
-                                <local:BorderlessEntry Placeholder="Enter OTP"
+                                <Entry Placeholder="Enter OTP"
                                        FontSize="13"
                                        Text="{Binding Otp}"
                                        MaxLength="6"
@@ -132,8 +129,4 @@
             </StackLayout>
         </Border>
     </Grid>
-
-
-
-
 </ContentPage>
