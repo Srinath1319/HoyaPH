@@ -1,4 +1,5 @@
 ﻿using HoyaPH.Model;
+using HoyaPH.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,14 @@ namespace HoyaPH.Services
 
         [Post("/Mobile/CheckCustomerExistancyAndVerification")]
         public Task<int> getExistancy([Body] ExistancyRequest existancyRequest);
+
+        [Post("/Mobile/CheckIsAuthenticatedMobileApp")]
+        public Task<LoginResponse> getLoginDetails([Body] LoginRequest loginRequest);
+
+        [Post("/Mobile/GetDashBoardDetailsApi")]
+        public Task<DashboardResponse> getDashboardDetails([Body] DashboardRequest dashboardRequest);
+
+        [Post("/Mobile/GetPromotionDetailsMobileApp")]
+        public Task<OffersResponse> getOffers([Body] OffersRequest offersRequest);
     }
 }

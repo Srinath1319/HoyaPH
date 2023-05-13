@@ -1,4 +1,5 @@
 ﻿using HoyaPH.Model;
+using HoyaPH.Models;
 using HoyaPH.Services;
 using Refit;
 using System;
@@ -20,6 +21,22 @@ namespace HoyaPH.Repository
         public async Task<int> getExistancyR(ExistancyRequest existancyRequest)
         {
             return await ApiCall(async () => await apiInterface.getExistancy(existancyRequest));
+        }
+
+        public async Task<LoginResponse> getLoginDetailsR(LoginRequest loginRequest)
+        {
+            return await ApiCall(async () => await apiInterface.getLoginDetails(loginRequest));
+
+        }
+
+        public async Task<DashboardResponse> getDashboardDetailsR(DashboardRequest dashboardRequest)
+        {
+            return await ApiCall(async () => await apiInterface.getDashboardDetails(dashboardRequest));
+        }
+
+        public async Task<OffersResponse> getOffersR(OffersRequest offersRequest)
+        {
+            return await ApiCall(async () => await apiInterface.getOffers(offersRequest));
         }
     }
 }

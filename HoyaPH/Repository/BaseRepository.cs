@@ -1,7 +1,9 @@
 ﻿
 
 using HoyaPH.Services;
+using Newtonsoft.Json;
 using Refit;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HoyaPH.Repository
 {
@@ -31,31 +33,36 @@ namespace HoyaPH.Repository
             Console.WriteLine(" <<-<<-<<- TOKEN : " + Token.access_token);
             Console.WriteLine("                                                                                                               ");
             Console.WriteLine("===============================================================================================================");
-           
+
             Preferences.Set("TOKEN", Token.access_token);
         }
 
         public async Task<T> ApiCall<T>(Func<Task<T>> request)
         {
-            
 
             try
             {
                 T result = await request();
+                var convertedResult = JsonConvert.SerializeObject(result);
+
                 Console.WriteLine("===============================================================================================================");
                 Console.WriteLine("                                                                                                               ");
-                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + result);
+                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + convertedResult);
                 Console.WriteLine("                                                                                                               ");
                 Console.WriteLine("===============================================================================================================");
                 return result;
 
-            }catch (ApiException ex) {
+            }
+            catch (ApiException)
+            {
 
                 await RefreshToken();
                 T result = await request();
+                var convertedResult = JsonConvert.SerializeObject(result);
+
                 Console.WriteLine("===============================================================================================================");
                 Console.WriteLine("                                                                                                               ");
-                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + result);
+                Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + convertedResult);
                 Console.WriteLine("                                                                                                               ");
                 Console.WriteLine("===============================================================================================================");
                 return result;

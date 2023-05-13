@@ -2,9 +2,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HoyaPH.Model;
+using HoyaPH.Models;
 using HoyaPH.Repository;
 using HoyaPH.Test;
+using HoyaPH.ViewModels;
 using HoyaPH.Views;
+using Newtonsoft.Json;
 
 namespace HoyaPH.ViewModel
 {
@@ -12,11 +15,14 @@ namespace HoyaPH.ViewModel
 
     {
         ApiRepository apiRepository;
-        
+        DashboardPageViewModel dashboardPageViewModel;
 
-        public MainPageViewModel(ApiRepository apiRepository)
+
+
+        public MainPageViewModel(ApiRepository apiRepository, DashboardPageViewModel dashboardPageViewModel)
         {
             this.apiRepository = apiRepository;
+            this.dashboardPageViewModel = dashboardPageViewModel;
 
         }
 
@@ -47,14 +53,14 @@ namespace HoyaPH.ViewModel
                 if (string.IsNullOrEmpty(Text))
                 {
 
-                    await Snackbar.Make("Please enter MembershipID / MobileNumber!", actionButtonText: "",visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red}).Show();
+                    await Snackbar.Make("Please enter MembershipID / MobileNumber!", actionButtonText: "", visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red }).Show();
 
 
                 }
                 else
                 {
                     AppController.getInstance().showLoadingDialog(App.Current.MainPage);
-                    
+
                     ExistancyRequest existancyRequest = new ExistancyRequest
                     {
 
@@ -69,7 +75,7 @@ namespace HoyaPH.ViewModel
 
                     var response = await apiRepository.getExistancyR(existancyRequest);
                     AppController.getInstance().hideLoadingDialog();
-                   
+
 
                     if (response == 1)
                     {
@@ -105,11 +111,43 @@ namespace HoyaPH.ViewModel
 
 
                 }
-
-                else if (Otp.Equals("123456"))
+                else if (!Otp.Equals("123456"))
                 {
 
-                    await Navigation.PushAsync(new DashboardPage());
+                    await Snackbar.Make("Please enter valid OTP!", actionButtonText: "", visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red }).Show();
+
+
+                }
+
+                else
+                {
+
+                    LoginRequest loginRequest = new LoginRequest {
+                    
+                        UserActionType = "GetPasswordDetails",
+                        Browser = "Android",
+                        LoggedDeviceName = "Android",
+                        Password = Otp,
+                        UserName = Text,
+                        UserType = "Customer",
+                        SessionId = "HOYA"
+                    };
+
+                    var loginResponse = await apiRepository.getLoginDetailsR(loginRequest);
+
+                    if (loginResponse.userList[0].result != -1)
+                    {
+
+                        AppController.getInstance().setLoginDetails(loginResponse);
+
+                        await Navigation.PushAsync(new DashboardPage(dashboardPageViewModel));
+
+                    }
+                    else {
+                        await Snackbar.Make("Please enter valid OTP!", actionButtonText: "", visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red }).Show();
+                    }
+
+                    
 
                 }
 
@@ -122,7 +160,8 @@ namespace HoyaPH.ViewModel
         }
 
 
-        public bool OnBackPressed() {
+        public bool OnBackPressed()
+        {
 
             if (Visiblity)
             {
@@ -131,7 +170,8 @@ namespace HoyaPH.ViewModel
                 BtnText = "Get OTP";
                 return true;
             }
-            else {
+            else
+            {
 
                 return false;
             }

@@ -43,7 +43,7 @@
                                        TextColor="{StaticResource Primary}"
                                        Margin="5,0,0,0" />
                             </HorizontalStackLayout>
-                            <Label Text="50000"
+                            <Label Text="{Binding Points}"
                                    FontFamily="Semibold"
                                    TextColor="{StaticResource Primary}"
                                    Margin="55,0,0,0" />
@@ -79,7 +79,7 @@
                     </Image>
                 </FlexLayout>
             </Grid>
-            <Label Text="Hi, Srinath"
+            <Label Text="{Binding Name}"
                    TextColor="White"
                    FontFamily="Semibold"
                    FontSize="20"
@@ -91,7 +91,7 @@
                            FontFamily="Light"
                            FontSize="12"
                            Margin="15,0,0,5" />
-                    <Label Text="Frontliner"
+                    <Label Text="{Binding Role}"
                            TextColor="White"
                            FontFamily="Medium"
                            FontSize="15"
@@ -104,7 +104,7 @@
                            HorizontalOptions="End"
                            FontSize="12"
                            Margin="0,0,15,5" />
-                    <Label Text="TH000065"
+                    <Label Text="{Binding MembershipId}"
                            TextColor="White"
                            FontFamily="Medium"
                            HorizontalOptions="End"
@@ -258,21 +258,19 @@
                    FontFamily="Medium"
                    FontSize="15"
                    Margin="15,0,0,5" />
-            <CarouselView >
-                <CarouselView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>https://source.unsplash.com/user/c_v_r/1900x800</x:String>
-                        <x:String>https://source.unsplash.com/user/c_v_r/1900x800</x:String>
-                    </x:Array>
-                </CarouselView.ItemsSource>
+            <CarouselView HeightRequest="200"
+                          ItemsSource="{Binding ImageUrl}"
+                          Loop="True"
+                          x:Name="CarouselView">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Border HeightRequest="450"
+                        <Border Margin="15,0,15,0"
                                 StrokeThickness="0"
-                                Margin="10,0,10,0"
-                                StrokeShape="RoundRectangle 10,10,10,10">
-                            <Image 
-                                   Source="{Binding .}"/>
+                                StrokeShape="RoundRectangle 10">
+                            <Image Source="{Binding .}"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand" />
                         </Border>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
