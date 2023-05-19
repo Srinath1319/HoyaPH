@@ -4,27 +4,19 @@ using CommunityToolkit.Mvvm.Input;
 using HoyaPH.Model;
 using HoyaPH.Models;
 using HoyaPH.Repository;
+using HoyaPH.Services;
 using HoyaPH.Test;
 using HoyaPH.ViewModels;
 using HoyaPH.Views;
 using Newtonsoft.Json;
+using Refit;
 
 namespace HoyaPH.ViewModel
 {
-    public partial class MainPageViewModel : ObservableObject
+    public partial class MainPageViewModel : BaseViewModel
 
     {
-        ApiRepository apiRepository;
-        DashboardPageViewModel dashboardPageViewModel;
 
-
-
-        public MainPageViewModel(ApiRepository apiRepository, DashboardPageViewModel dashboardPageViewModel)
-        {
-            this.apiRepository = apiRepository;
-            this.dashboardPageViewModel = dashboardPageViewModel;
-
-        }
 
         [ObservableProperty]
         string text;
@@ -41,7 +33,7 @@ namespace HoyaPH.ViewModel
         [ObservableProperty]
         Boolean enableMembershipID = true;
 
-        public INavigation Navigation { get; internal set; }
+       
 
         [RelayCommand]
         public async void CheckExistancy()
@@ -121,9 +113,10 @@ namespace HoyaPH.ViewModel
 
                 else
                 {
-
-                    LoginRequest loginRequest = new LoginRequest {
                     
+                    LoginRequest loginRequest = new LoginRequest
+                    {
+
                         UserActionType = "GetPasswordDetails",
                         Browser = "Android",
                         LoggedDeviceName = "Android",
@@ -140,13 +133,17 @@ namespace HoyaPH.ViewModel
 
                         AppController.getInstance().setLoginDetails(loginResponse);
 
-                        await Navigation.PushAsync(new DashboardPage(dashboardPageViewModel));
+                        
+
+                        await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage());
 
                     }
-                    else {
+                    else
+                    {
                         await Snackbar.Make("Please enter valid OTP!", actionButtonText: "", visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red }).Show();
                     }
 
+                    
                     
 
                 }

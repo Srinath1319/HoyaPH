@@ -4,20 +4,21 @@ namespace HoyaPH.Views;
 
 public partial class DashboardPage : ContentPage
 {
+
+    DashboardPageViewModel  viewModel = new DashboardPageViewModel();
     
 
-    public DashboardPage(DashboardPageViewModel dashboardPageViewModel)
+    public DashboardPage()
 	{
 		InitializeComponent();
-		BindingContext = dashboardPageViewModel;
+		BindingContext = viewModel;
         
 	}
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-
-        ((DashboardPageViewModel)(BindingContext)).getDashboardDetails();
+        viewModel.getDashboardDetails();
 
     }
 }

@@ -10,33 +10,33 @@ using System.Threading.Tasks;
 
 namespace HoyaPH.Repository
 {
-    public class ApiRepository : BaseRepository
+    public class ApiRepository 
     {
         ApiInterface apiInterface;
-        public ApiRepository(ApiInterface apiInterface) : base(apiInterface)
+        public ApiRepository(ApiInterface apiInterface) 
         {
             this.apiInterface = apiInterface;
         }
 
         public async Task<int> getExistancyR(ExistancyRequest existancyRequest)
         {
-            return await ApiCall(async () => await apiInterface.getExistancy(existancyRequest));
+            return await apiInterface.getExistancy(existancyRequest);
         }
 
         public async Task<LoginResponse> getLoginDetailsR(LoginRequest loginRequest)
         {
-            return await ApiCall(async () => await apiInterface.getLoginDetails(loginRequest));
+            return await apiInterface.getLoginDetails(loginRequest);
 
         }
 
         public async Task<DashboardResponse> getDashboardDetailsR(DashboardRequest dashboardRequest)
         {
-            return await ApiCall(async () => await apiInterface.getDashboardDetails(dashboardRequest));
+            return await apiInterface.getDashboardDetails(dashboardRequest);
         }
 
         public async Task<OffersResponse> getOffersR(OffersRequest offersRequest)
         {
-            return await ApiCall(async () => await apiInterface.getOffers(offersRequest));
+            return await apiInterface.getOffers(offersRequest);
         }
     }
 }

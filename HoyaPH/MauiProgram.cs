@@ -24,17 +24,7 @@ public static class MauiProgram
 				fonts.AddFont("GalanoGrotesqueMedium.otf", "Medium");
 				fonts.AddFont("GalanoGrotesqueLight.otf", "Light");
 			});
-        builder.Services.AddTransient<ApiRepository>();
-
-        builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<DashboardPage>();
-        builder.Services.AddTransient<AuthHeader>();
-        builder.Services.AddTransient<MainPageViewModel>();
-        builder.Services.AddTransient<DashboardPageViewModel>();
-
-		builder.Services.AddRefitClient<ApiInterface>()
-			.ConfigureHttpClient(c => c.BaseAddress = new Uri("https://hoyatserv.loyltwo3ks.com"))
-			.AddHttpMessageHandler<AuthHeader>();
+        
 
 		return builder.Build();
 	}

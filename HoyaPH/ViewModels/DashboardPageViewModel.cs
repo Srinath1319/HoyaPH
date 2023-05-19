@@ -4,24 +4,16 @@ using CommunityToolkit.Mvvm.Input;
 
 using HoyaPH.Models;
 using HoyaPH.Repository;
+using HoyaPH.Services;
 using HoyaPH.Test;
-
+using HoyaPH.Utils;
+using Refit;
 using System.Collections.ObjectModel;
 
 namespace HoyaPH.ViewModels
 {
-    public partial class DashboardPageViewModel : ObservableObject
-    {
-
-        ApiRepository apiRepository;
-
-
-        public DashboardPageViewModel(ApiRepository apiRepository)
-        {
-            this.apiRepository = apiRepository;
-
-        }
-
+    public partial class DashboardPageViewModel : BaseViewModel
+    {  
         [ObservableProperty]
         string points;
 
@@ -49,7 +41,7 @@ namespace HoyaPH.ViewModels
         [RelayCommand]
         public async void getDashboardDetails()
         {
-
+            AppController.getInstance().showLoadingDialog(App.Current.MainPage);
             DashboardRequest dashboardRequest = new DashboardRequest { ActorId = AppController.getInstance().getLoginDetails().userList[0].userId };
 
             var dashboardResponse = await apiRepository.getDashboardDetailsR(dashboardRequest);
@@ -65,14 +57,14 @@ namespace HoyaPH.ViewModels
 
             for (int i = 0; i < offersResponse.lstPromotionJsonList.Length; i++)
             {
-                ImageUrl.Add("https://hoyatdemo.loyltwo3ks.com/"+offersResponse.lstPromotionJsonList[i].proImage);
+                ImageUrl.Add(Constants.PROMO_IMAGE_BASE+offersResponse.lstPromotionJsonList[i].proImage);
             }
 
-            
-           
+            AppController.getInstance().hideLoadingDialog();
 
 
-            
+
+
 
 
         }

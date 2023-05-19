@@ -8,10 +8,10 @@ public partial class MainPage : ContentPage
 	
     MainPageViewModel viewModel = new MainPageViewModel();
 
-	public MainPage(MainPageViewModel mainPageViewModel)
+	public MainPage()
 	{
-        mainPageViewModel.Navigation = Navigation;
-        BindingContext = mainPageViewModel;
+        
+        BindingContext = viewModel;
         InitializeComponent();
        
 
@@ -21,10 +21,10 @@ public partial class MainPage : ContentPage
     protected override bool OnBackButtonPressed()
     {
 
-        if (((MainPageViewModel)(BindingContext)).OnBackPressed())
+        if (viewModel.OnBackPressed())
         {
 
-            ((MainPageViewModel)(BindingContext)).OnBackPressed();
+            viewModel.OnBackPressed();
             Preferences.Clear();
             return true;
         }

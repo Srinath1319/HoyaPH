@@ -9,24 +9,19 @@ using System.Threading.Tasks;
 
 namespace HoyaPH.Services
 {
+    [Headers("Authorization: Bearer")]
     public interface ApiInterface
     {
-        [Headers("Content-Type: application/x-www-form-urlencoded")]
-        [Post("/token")]
-        public Task<TokenResponse> getToken([Body(BodySerializationMethod.UrlEncoded)] FormUrlEncodedContent TokenRequest);
-
-
-
-        [Post("/Mobile/CheckCustomerExistancyAndVerification")]
+        [Post("/CheckCustomerExistancyAndVerification")]
         public Task<int> getExistancy([Body] ExistancyRequest existancyRequest);
 
-        [Post("/Mobile/CheckIsAuthenticatedMobileApp")]
+        [Post("/CheckIsAuthenticatedMobileApp")]
         public Task<LoginResponse> getLoginDetails([Body] LoginRequest loginRequest);
 
-        [Post("/Mobile/GetDashBoardDetailsApi")]
+        [Post("/GetDashBoardDetailsApi")]
         public Task<DashboardResponse> getDashboardDetails([Body] DashboardRequest dashboardRequest);
 
-        [Post("/Mobile/GetPromotionDetailsMobileApp")]
+        [Post("/GetPromotionDetailsMobileApp")]
         public Task<OffersResponse> getOffers([Body] OffersRequest offersRequest);
     }
 }

@@ -1,19 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+using HoyaPH.Utils;
+using Newtonsoft.Json;
+using Refit;
+
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HoyaPH.Services
 {
 
     public class AuthHeader : DelegatingHandler
     {
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        List<KeyValuePair<string, string>> KeyContent;
+        FormUrlEncodedContent TokenRequest;
 
-
+        public class TokenResponse
         {
+            public string access_token { get; set; }
+            public string token_type { get; set; }
+            public int expires_in { get; set; }
+            public string userName { get; set; }
+
+            [JsonProperty(".issued")]
+            public string issued { get; set; }
+
+            [JsonProperty(".expires")]
+            public string expires { get; set; }
+        }
+
+
+        public interface TokenInterface
+        {
+
+            [Headers("Content-Type: application/x-www-form-urlencoded")]
+            [Post("/token")]
+            public Task<TokenResponse> getToken([Body(BodySerializationMethod.UrlEncoded)] FormUrlEncodedContent TokenRequest);
+        }
+
+
+        public AuthHeader()
+        {
+            InnerHandler = new HttpClientHandler();
+            KeyContent = new List<KeyValuePair<string, string>> {
+            new KeyValuePair<string, string>("grant_type",Constants.GRANT_TYPE),
+            new KeyValuePair<string, string>("username",Constants.USERNAME),
+            new KeyValuePair<string, string>("password",Constants.PASSWORD) };
+
+        }
+
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            var authApi = RestService.For<TokenInterface>(Constants.TOKEN_URL);
+            TokenRequest = new FormUrlEncodedContent(KeyContent);
+            var Token = await authApi.getToken(TokenRequest);
 
             Console.WriteLine("===============================================================================================================");
             Console.WriteLine("                                                                                                               ");
@@ -25,9 +65,15 @@ namespace HoyaPH.Services
             Console.WriteLine("                                                                                                               ");
             Console.WriteLine("===============================================================================================================");
 
-            
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("TOKEN", "Default_token"));
-            return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token.access_token);
+            var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            Console.WriteLine("===============================================================================================================");
+            Console.WriteLine("                                                                                                               ");
+            Console.WriteLine(" <<-<<-<<- API_RESPONSE : " + await response.Content.ReadAsStringAsync());
+            Console.WriteLine("                                                                                                               ");
+            Console.WriteLine("===============================================================================================================");
+            return response;
         }
 
     }
