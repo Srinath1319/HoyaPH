@@ -27,20 +27,6 @@ namespace HoyaPH.Test
 
 
 
-        Popup popup; 
-
-        public  void showLoadingDialog(Page page)
-        {
-            popup = new Popup();
-            page.ShowPopup(popup);
-        }
-           
-
-        public void hideLoadingDialog()
-        {
-            
-            popup.closePopup();
-        }
 
 
         public void setLoginDetails(LoginResponse loginResponse) {
@@ -52,6 +38,19 @@ namespace HoyaPH.Test
         public LoginResponse getLoginDetails() {
             
             return JsonConvert.DeserializeObject<LoginResponse>(Preferences.Get("LOGIN_RESPONSE","Default_value"));
+        }
+
+        public void setDashboardDetails(DashboardResponse dashboardResponse)
+        {
+
+            Preferences.Set("DASHBOARD_RESPONSE", JsonConvert.SerializeObject(dashboardResponse));
+
+        }
+
+        public DashboardResponse getDashboardDetails()
+        {
+
+            return JsonConvert.DeserializeObject<DashboardResponse>(Preferences.Get("DASHBOARD_RESPONSE", "Default_value"));
         }
     }
 }

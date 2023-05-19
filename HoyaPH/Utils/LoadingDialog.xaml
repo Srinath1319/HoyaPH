@@ -4,7 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                Color="Transparent"
                CanBeDismissedByTappingOutsideOfPopup="False"
-               x:Class="HoyaPH.Test.Popup">
+               x:Class="HoyaPH.Test.LoadingDialog">
     <VerticalStackLayout>
         <ActivityIndicator Color="Red"
                            IsRunning="True"

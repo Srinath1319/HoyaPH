@@ -23,5 +23,8 @@ namespace HoyaPH.Services
 
         [Post("/GetPromotionDetailsMobileApp")]
         public Task<OffersResponse> getOffers([Body] OffersRequest offersRequest);
+
+        [Post("/BindAssessmentRequestDetails")]
+        public Task<MyEarningResponse> getMyEarnings([Body] MyEarningRequest myEarningRequest);
     }
 }

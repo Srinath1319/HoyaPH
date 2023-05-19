@@ -40,5 +40,8 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
     <Color x:Key="Grey">#EAEAEA</Color>
+    <Color x:Key="DarkGrey">#656565</Color>
+    <Color x:Key="Green">#0FB609</Color>
+    <Color x:Key="LightBlue">#F2F6FC</Color>
 
 </ResourceDictionary>

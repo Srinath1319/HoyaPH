@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HoyaPH.Views.MyEarningPage"
+             Title="My Earning">
+    <ListView ItemsSource="{Binding Customerbasicinfolistjsons}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Border HorizontalOptions="FillAndExpand"
+                            StrokeThickness="0"
+                            HeightRequest="200"
+                            Margin="10,5,10,5"
+                            StrokeShape="RoundRectangle 10">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Radius="10"
+                                    Opacity="0.2" />
+                        </Border.Shadow>
+                        <Grid RowDefinitions="*,*,*,Auto"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand">
+                            <Grid Grid.Row="0"
+                                  ColumnDefinitions="*,*"
+                                  VerticalOptions="Center"
+                                  Padding="10,0,10,0">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="Promotion name"
+                                           FontSize="12"
+                                           TextColor="{StaticResource DarkGrey}"
+                                           FontFamily="Medium" />
+                                    <Label Text="{Binding assessmentName}"
+                                           TextColor="{StaticResource Primary}"
+                                           FontFamily="Semibold"
+                                           Margin="0,5,0,0"
+                                           FontSize="16" />
+                                </VerticalStackLayout>
+                                <Border Grid.Column="1"
+                                        HeightRequest="40"
+                                        WidthRequest="130"
+                                        HorizontalOptions="End"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 30"
+                                        BackgroundColor="{StaticResource Primary}">
+                                    <FlexLayout HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand"
+                                                Direction="Row"
+                                                AlignItems="Center"
+                                                JustifyContent="Center">
+                                        <Label Text="750"
+                                               FontSize="14"
+                                               TextColor="White"
+                                               FontFamily="Medium" />
+                                        <Label Text="{Binding assessmentName}"
+                                               TextColor="White"
+                                               FontFamily="Medium"
+                                               Margin="3,0,0,0"
+                                               FontSize="10" />
+                                    </FlexLayout>
+                                </Border>
+                            </Grid>
+                            <Grid Grid.Row="1"
+                                  VerticalOptions="Center"
+                                  Padding="10,0,10,0"
+                                  ColumnDefinitions="*,*">
+                                <VerticalStackLayout Grid.Column="0"
+                                                     VerticalOptions="Center">
+                                    <Label Text="Product Name"
+                                           FontSize="12"
+                                           TextColor="{StaticResource DarkGrey}"
+                                           FontFamily="Medium" />
+                                    <Label Text="{Binding assessmentName}"
+                                           TextColor="{StaticResource Primary}"
+                                           FontFamily="Medium"
+                                           Margin="0,5,0,0"
+                                           FontSize="14" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center">
+                                    <Label Text="Date"
+                                           FontSize="12"
+                                           HorizontalOptions="End"
+                                           TextColor="{StaticResource DarkGrey}"
+                                           FontFamily="Medium" />
+                                    <Label Text="{Binding assessmentName}"
+                                           TextColor="{StaticResource Primary}"
+                                           HorizontalOptions="End"
+                                           FontFamily="Medium"
+                                           Margin="0,5,0,0"
+                                           FontSize="14" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid Grid.Row="2"
+                                  VerticalOptions="Center"
+                                  Padding="10,0,10,0"
+                                  ColumnDefinitions="*,*">
+                                <VerticalStackLayout Grid.Column="0"
+                                                     VerticalOptions="Center">
+                                    <Label Text="Invoice Number"
+                                           FontSize="12"
+                                           TextColor="{StaticResource DarkGrey}"
+                                           FontFamily="Medium" />
+                                    <Label Text="{Binding assessmentName}"
+                                           TextColor="{StaticResource Primary}"
+                                           FontFamily="Medium"
+                                           Margin="0,5,0,0"
+                                           FontSize="14" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center">
+                                    <Label Text="Remarks"
+                                           FontSize="12"
+                                           HorizontalOptions="End"
+                                           TextColor="{StaticResource DarkGrey}"
+                                           FontFamily="Medium" />
+                                    <Label Text="{Binding assessmentName}"
+                                           TextColor="{StaticResource Green}"
+                                           HorizontalOptions="End"
+                                           FontFamily="Medium"
+                                           Margin="0,5,0,0"
+                                           FontSize="14" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <FlexLayout Grid.Row="3"
+                                        Direction="Row"
+                                        AlignItems="Center"
+                                        HeightRequest="30"
+                                        BackgroundColor="{StaticResource LightBlue}"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"
+                                        JustifyContent="Center">
+                                <Label Text="Points will expire on"
+                                       FontSize="12"
+                                       TextColor="{StaticResource Primary}"
+                                       FontFamily="Medium" />
+                                <Label Text="{Binding assessmentName}"
+                                       TextColor="{StaticResource DarkGrey}"
+                                       Margin="5,0,0,0"
+                                       FontFamily="Medium"
+                                       FontSize="14" />
+                            </FlexLayout>
+                        </Grid>
+                    </Border>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

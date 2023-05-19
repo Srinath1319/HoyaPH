@@ -153,6 +153,10 @@
                           Stroke="{StaticResource Grey}" />
                     <Grid Grid.Row="2"
                           ColumnDefinitions="Auto,*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command ="{Binding MyEarningTappedCommand}"
+                                                   />
+                        </Grid.GestureRecognizers>
                         <Image Source="earning.png"
                                HeightRequest="25"
                                WidthRequest="25"

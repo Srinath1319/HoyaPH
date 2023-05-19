@@ -33,7 +33,7 @@ namespace HoyaPH.ViewModel
         [ObservableProperty]
         Boolean enableMembershipID = true;
 
-       
+        //Popup popup = new Popup();
 
         [RelayCommand]
         public async void CheckExistancy()
@@ -51,7 +51,9 @@ namespace HoyaPH.ViewModel
                 }
                 else
                 {
-                    AppController.getInstance().showLoadingDialog(App.Current.MainPage);
+                    LoadingDialog.getInstance().showDialog(App.Current.MainPage);
+
+
 
                     ExistancyRequest existancyRequest = new ExistancyRequest
                     {
@@ -66,7 +68,7 @@ namespace HoyaPH.ViewModel
 
 
                     var response = await apiRepository.getExistancyR(existancyRequest);
-                    AppController.getInstance().hideLoadingDialog();
+                    LoadingDialog.getInstance().hideDialog();
 
 
                     if (response == 1)
@@ -113,7 +115,7 @@ namespace HoyaPH.ViewModel
 
                 else
                 {
-                    
+                    LoadingDialog.getInstance().showDialog(App.Current.MainPage);
                     LoginRequest loginRequest = new LoginRequest
                     {
 
@@ -127,24 +129,25 @@ namespace HoyaPH.ViewModel
                     };
 
                     var loginResponse = await apiRepository.getLoginDetailsR(loginRequest);
-
+                    LoadingDialog.getInstance().hideDialog();
                     if (loginResponse.userList[0].result != -1)
                     {
 
                         AppController.getInstance().setLoginDetails(loginResponse);
 
-                        
+
 
                         await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage());
 
                     }
                     else
                     {
+
                         await Snackbar.Make("Please enter valid OTP!", actionButtonText: "", visualOptions: new CommunityToolkit.Maui.Core.SnackbarOptions { BackgroundColor = Colors.Red }).Show();
                     }
 
-                    
-                    
+
+
 
                 }
 

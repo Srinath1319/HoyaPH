@@ -7,6 +7,7 @@ using HoyaPH.Repository;
 using HoyaPH.Services;
 using HoyaPH.Test;
 using HoyaPH.Utils;
+using HoyaPH.Views;
 using Refit;
 using System.Collections.ObjectModel;
 
@@ -36,12 +37,16 @@ namespace HoyaPH.ViewModels
             set => SetProperty(ref imageUrl, value);
         }
 
+        [RelayCommand]
+        public void MyEarningTapped() { 
+            App.Current.MainPage.Navigation.PushAsync(new MyEarningPage());
+        }
 
 
         [RelayCommand]
         public async void getDashboardDetails()
         {
-            AppController.getInstance().showLoadingDialog(App.Current.MainPage);
+            LoadingDialog.getInstance().showDialog(App.Current.MainPage);
             DashboardRequest dashboardRequest = new DashboardRequest { ActorId = AppController.getInstance().getLoginDetails().userList[0].userId };
 
             var dashboardResponse = await apiRepository.getDashboardDetailsR(dashboardRequest);
@@ -55,12 +60,14 @@ namespace HoyaPH.ViewModels
             Role = dashboardResponse.lstCustomerFeedBackJsonApi[0].customerType.ToString();
             MembershipId = dashboardResponse.lstCustomerFeedBackJsonApi[0].loyaltyId.ToString();
 
+            AppController.getInstance().setDashboardDetails(dashboardResponse);
+
             for (int i = 0; i < offersResponse.lstPromotionJsonList.Length; i++)
             {
                 ImageUrl.Add(Constants.PROMO_IMAGE_BASE+offersResponse.lstPromotionJsonList[i].proImage);
             }
 
-            AppController.getInstance().hideLoadingDialog();
+            LoadingDialog.getInstance().hideDialog();
 
 
 

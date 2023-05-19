@@ -38,5 +38,10 @@ namespace HoyaPH.Repository
         {
             return await apiInterface.getOffers(offersRequest);
         }
+
+        public async Task<MyEarningResponse> getMyEarningsR(MyEarningRequest myEarningRequest)
+        {
+            return await apiInterface.getMyEarnings(myEarningRequest);
+        }
     }
 }
