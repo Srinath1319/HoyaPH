@@ -3,37 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HoyaPH.Views.MyEarningPage"
              Title="My Earning">
-    <ListView ItemsSource="{Binding Customerbasicinfolistjsons}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Border HorizontalOptions="FillAndExpand"
-                            StrokeThickness="0"
-                            HeightRequest="200"
-                            Margin="10,5,10,5"
-                            StrokeShape="RoundRectangle 10">
-                        <Border.Shadow>
-                            <Shadow Brush="Black"
-                                    Radius="10"
-                                    Opacity="0.2" />
-                        </Border.Shadow>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+        <CollectionView ItemsSource="{Binding Customerbasicinfolistjsons}"
+                        Margin="0,5,0,5"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="HeightProportional,WidthProportional">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HorizontalOptions="FillAndExpand"
+                           HeightRequest="180"
+                           HasShadow="True"
+                           Padding="0"
+                           IsClippedToBounds="True"
+                           BorderColor="White"
+                           Margin="10,5,10,5">
                         <Grid RowDefinitions="*,*,*,Auto"
                               HorizontalOptions="FillAndExpand"
                               VerticalOptions="FillAndExpand">
                             <Grid Grid.Row="0"
-                                  ColumnDefinitions="*,*"
+                                  ColumnDefinitions="Auto,*"
                                   VerticalOptions="Center"
-                                  Padding="10,0,10,0">
+                                  Padding="10,5,10,0">
                                 <VerticalStackLayout Grid.Column="0">
                                     <Label Text="Promotion name"
                                            FontSize="12"
                                            TextColor="{StaticResource DarkGrey}"
                                            FontFamily="Medium" />
-                                    <Label Text="{Binding assessmentName}"
+                                    <Label Text="{Binding AssessmentName}"
                                            TextColor="{StaticResource Primary}"
                                            FontFamily="Semibold"
                                            Margin="0,5,0,0"
-                                           FontSize="16" />
+                                           FontSize="14" />
                                 </VerticalStackLayout>
                                 <Border Grid.Column="1"
                                         HeightRequest="40"
@@ -47,11 +48,11 @@
                                                 Direction="Row"
                                                 AlignItems="Center"
                                                 JustifyContent="Center">
-                                        <Label Text="750"
+                                        <Label Text="{Binding creditedPoint}"
                                                FontSize="14"
                                                TextColor="White"
                                                FontFamily="Medium" />
-                                        <Label Text="{Binding assessmentName}"
+                                        <Label Text="Points"
                                                TextColor="White"
                                                FontFamily="Medium"
                                                Margin="3,0,0,0"
@@ -69,7 +70,7 @@
                                            FontSize="12"
                                            TextColor="{StaticResource DarkGrey}"
                                            FontFamily="Medium" />
-                                    <Label Text="{Binding assessmentName}"
+                                    <Label Text="{Binding productName}"
                                            TextColor="{StaticResource Primary}"
                                            FontFamily="Medium"
                                            Margin="0,5,0,0"
@@ -82,7 +83,7 @@
                                            HorizontalOptions="End"
                                            TextColor="{StaticResource DarkGrey}"
                                            FontFamily="Medium" />
-                                    <Label Text="{Binding assessmentName}"
+                                    <Label Text="{Binding trxnDate}"
                                            TextColor="{StaticResource Primary}"
                                            HorizontalOptions="End"
                                            FontFamily="Medium"
@@ -100,7 +101,7 @@
                                            FontSize="12"
                                            TextColor="{StaticResource DarkGrey}"
                                            FontFamily="Medium" />
-                                    <Label Text="{Binding assessmentName}"
+                                    <Label Text="{Binding invoiceNo}"
                                            TextColor="{StaticResource Primary}"
                                            FontFamily="Medium"
                                            Margin="0,5,0,0"
@@ -113,7 +114,7 @@
                                            HorizontalOptions="End"
                                            TextColor="{StaticResource DarkGrey}"
                                            FontFamily="Medium" />
-                                    <Label Text="{Binding assessmentName}"
+                                    <Label Text="{Binding remarks}"
                                            TextColor="{StaticResource Green}"
                                            HorizontalOptions="End"
                                            FontFamily="Medium"
@@ -133,16 +134,33 @@
                                        FontSize="12"
                                        TextColor="{StaticResource Primary}"
                                        FontFamily="Medium" />
-                                <Label Text="{Binding assessmentName}"
+                                <Label Text="{Binding pointExpiryDate}"
                                        TextColor="{StaticResource DarkGrey}"
                                        Margin="5,0,0,0"
                                        FontFamily="Medium"
                                        FontSize="14" />
                             </FlexLayout>
                         </Grid>
-                    </Border>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ImageButton AbsoluteLayout.LayoutBounds="1,1,100,100"
+                     BackgroundColor="{StaticResource Primary}"
+                     Margin="0,0,20,20"
+                     CornerRadius="25"
+                     IsEnabled="True"
+                     Source="filter.png"
+                     Aspect="AspectFit"
+                     Clicked="IB_clicked"
+                     Padding="15"
+                     AbsoluteLayout.LayoutFlags="PositionProportional">
+            <ImageButton.Shadow>
+                <Shadow Radius="10"
+                        Brush="black"
+                        Offset="0,0"
+                        Opacity="0.5" />
+            </ImageButton.Shadow>
+        </ImageButton>
+    </AbsoluteLayout>
 </ContentPage>

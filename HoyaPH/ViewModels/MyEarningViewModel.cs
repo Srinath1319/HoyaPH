@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Alerts;
 using HoyaPH.Models;
 using HoyaPH.Test;
+using HoyaPH.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,17 +16,9 @@ namespace HoyaPH.ViewModels
     public partial class MyEarningViewModel:BaseViewModel
     {
         [ObservableProperty]
-        public List<Customerbasicinfolistjson> customerbasicinfolistjsons = new List<Customerbasicinfolistjson>();
+        public ObservableCollection<Customerbasicinfolistjson> customerbasicinfolistjsons = new ObservableCollection<Customerbasicinfolistjson>();
 
         
-
-
-
-        /*public ObservableCollection<Customerbasicinfolistjson> Customerbasicinfolistjsons
-        {
-            get => customerbasicinfolistjsons;
-            set => SetProperty(ref customerbasicinfolistjsons, value);
-        }*/
         public async void getMyEarningDetails() {
 
             LoadingDialog.getInstance().showDialog(App.Current.MainPage);
@@ -39,15 +34,31 @@ namespace HoyaPH.ViewModels
 
             var myEarningResponse = await apiRepository.getMyEarningsR(myEarningRequest);
             LoadingDialog.getInstance().hideDialog();
-
-            for(int i = 0; i < myEarningResponse.customerBasicInfoListJson.Length; i++)
+            
+            for (int i = 0; i < myEarningResponse.customerBasicInfoListJson.Length; i++)
             {
 
+                if (myEarningResponse.customerBasicInfoListJson[i].trxnDate != null)
+                {
+                    myEarningResponse.customerBasicInfoListJson[i].trxnDate = myEarningResponse.customerBasicInfoListJson[i].trxnDate.Split(" ")[0];
+                }
+                if (myEarningResponse.customerBasicInfoListJson[i].pointExpiryDate != null)
+                {
+                    myEarningResponse.customerBasicInfoListJson[i].pointExpiryDate = myEarningResponse.customerBasicInfoListJson[i].pointExpiryDate.Split(" ")[0];
+                }
                 Customerbasicinfolistjsons.Add(myEarningResponse.customerBasicInfoListJson[i]);
                 
             }
             
         
+        }
+
+
+        [RelayCommand]
+        public void OnFilterClicked()
+        {
+            Console.WriteLine(" click this ImageButton2 ");
+            FilterDialog.getInstance().showDialog(App.Current.MainPage);
         }
     }
 }

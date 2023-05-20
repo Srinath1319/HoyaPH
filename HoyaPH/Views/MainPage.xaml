@@ -4,7 +4,6 @@
              xmlns:pinview="clr-namespace:PINView.Maui;assembly=PINView.Maui"
              NavigationPage.HasNavigationBar="False"
              BackgroundImageSource="login_bg.png"
-             
              x:Class="HoyaPH.MainPage"
              xmlns:local="clr-namespace:HoyaPH.Test">
     <Grid RowDefinitions="150,130,*">

@@ -55,6 +55,7 @@
 	  <None Remove="Resources\Images\change_lang.png" />
 	  <None Remove="Resources\Images\customer_support.png" />
 	  <None Remove="Resources\Images\earning.png" />
+	  <None Remove="Resources\Images\filter.png" />
 	  <None Remove="Resources\Images\forward_arrow.png" />
 	  <None Remove="Resources\Images\left_arrow.png" />
 	  <None Remove="Resources\Images\login_bg.png" />
@@ -84,6 +85,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Utils\FilterDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Utils\LoadingDialog.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

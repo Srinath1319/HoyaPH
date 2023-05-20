@@ -9,15 +9,23 @@ public partial class MyEarningPage : ContentPage
     
     public MyEarningPage()
 	{
-		InitializeComponent();
-		BindingContext = viewModel;
+		
+		
 	}
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 		viewModel.getMyEarningDetails();
-
         
+        BindingContext = viewModel;
+        InitializeComponent();
+
+
+    }
+
+    private void IB_clicked(object sender, EventArgs e)
+    {
+        viewModel.OnFilterClicked();
     }
 }

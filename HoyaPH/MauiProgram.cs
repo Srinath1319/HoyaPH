@@ -24,6 +24,8 @@ public static class MauiProgram
 				fonts.AddFont("GalanoGrotesqueMedium.otf", "Medium");
 				fonts.AddFont("GalanoGrotesqueLight.otf", "Light");
 			});
+
+		
         
 
 		return builder.Build();

@@ -39,7 +39,7 @@ namespace HoyaPH.ViewModels
 
         [RelayCommand]
         public void MyEarningTapped() { 
-            App.Current.MainPage.Navigation.PushAsync(new MyEarningPage());
+            App.Current.MainPage.Navigation.PushAsync(new MyEarningPage(),true);
         }
 
 

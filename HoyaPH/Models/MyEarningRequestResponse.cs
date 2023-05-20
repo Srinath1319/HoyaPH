@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace HoyaPH.Models
         public int totalRecords { get; set; }
     }
 
-    public class Customerbasicinfolistjson
+    public partial class Customerbasicinfolistjson:ObservableObject
     {
         public object fullName { get; set; }
         public object email { get; set; }
@@ -107,7 +108,11 @@ namespace HoyaPH.Models
         public object partnerID { get; set; }
         public object partnerName { get; set; }
         public object assessmentCertificate { get; set; }
-        public string assessmentName { get; set; }
+
+        [ObservableProperty]
+        public string assessmentName;
+
+        
         public object productDesc { get; set; }
         public string remarks { get; set; }
         public object sku { get; set; }
@@ -154,6 +159,7 @@ namespace HoyaPH.Models
         public object dealerCode { get; set; }
         public object approvedQuantity { get; set; }
         public string pointExpiryDate { get; set; }
+        
     }
 
 

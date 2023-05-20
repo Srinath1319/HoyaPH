@@ -137,7 +137,7 @@ namespace HoyaPH.ViewModel
 
 
 
-                        await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage());
+                        await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage(),true);
 
                     }
                     else
