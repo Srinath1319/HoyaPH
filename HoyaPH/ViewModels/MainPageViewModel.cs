@@ -6,6 +6,7 @@ using HoyaPH.Models;
 using HoyaPH.Repository;
 using HoyaPH.Services;
 using HoyaPH.Test;
+using HoyaPH.Utils;
 using HoyaPH.ViewModels;
 using HoyaPH.Views;
 using Newtonsoft.Json;
@@ -134,10 +135,16 @@ namespace HoyaPH.ViewModel
                     {
 
                         AppController.getInstance().setLoginDetails(loginResponse);
+                        Preferences.Set(Constants.IS_LOGGED_IN, "TRUE");
+
+
+                        
+                        await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage(), true);
 
 
 
-                        await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage(),true);
+
+
 
                     }
                     else

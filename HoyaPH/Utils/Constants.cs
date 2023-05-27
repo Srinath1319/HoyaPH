@@ -14,5 +14,6 @@ namespace HoyaPH.Utils
         public const string GRANT_TYPE = "password";
         public const string USERNAME = "LtyHoyaThDemo";
         public const string PASSWORD = "H0)Y@7L$mK#9p87";
+        public const string IS_LOGGED_IN = "IS_LOGGED_IN";
     }
 }

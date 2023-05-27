@@ -27,26 +27,38 @@ namespace HoyaPH.ViewModels
         [ObservableProperty]
         string membershipId;
 
-        
+        [ObservableProperty]
+        string profileImage;
 
+
+        [ObservableProperty]
         public ObservableCollection<string> imageUrl = new ObservableCollection<string>();
 
-        public ObservableCollection<string> ImageUrl
+        /*public ObservableCollection<string> ImageUrl
         {
             get => imageUrl;
             set => SetProperty(ref imageUrl, value);
-        }
+        }*/
 
         [RelayCommand]
         public void MyEarningTapped() { 
             App.Current.MainPage.Navigation.PushAsync(new MyEarningPage(),true);
         }
 
+        [RelayCommand]
+        public void Logout()
+        {
+            Preferences.Clear();
+            Preferences.Set(Constants.IS_LOGGED_IN, "FALSE");
+            App.Current.MainPage.Navigation.PushAsync(new MainPage(), true);
+            
+        }
+
 
         [RelayCommand]
         public async void getDashboardDetails()
         {
-            LoadingDialog.getInstance().showDialog(App.Current.MainPage);
+            //LoadingDialog.getInstance().showDialog(App.Current.MainPage);
             DashboardRequest dashboardRequest = new DashboardRequest { ActorId = AppController.getInstance().getLoginDetails().userList[0].userId };
 
             var dashboardResponse = await apiRepository.getDashboardDetailsR(dashboardRequest);
@@ -59,7 +71,8 @@ namespace HoyaPH.ViewModels
             Name = "Hi, " + dashboardResponse.lstCustomerFeedBackJsonApi[0].firstName.ToString() + dashboardResponse.lstCustomerFeedBackJsonApi[0].lastName.ToString();
             Role = dashboardResponse.lstCustomerFeedBackJsonApi[0].customerType.ToString();
             MembershipId = dashboardResponse.lstCustomerFeedBackJsonApi[0].loyaltyId.ToString();
-
+            ProfileImage = Constants.PROMO_IMAGE_BASE+dashboardResponse.lstCustomerFeedBackJsonApi[0].customerImage.ToString().Replace("~","");
+            Console.WriteLine("PROFILEIMAGE" + ProfileImage);
             AppController.getInstance().setDashboardDetails(dashboardResponse);
 
             for (int i = 0; i < offersResponse.lstPromotionJsonList.Length; i++)
@@ -67,7 +80,7 @@ namespace HoyaPH.ViewModels
                 ImageUrl.Add(Constants.PROMO_IMAGE_BASE+offersResponse.lstPromotionJsonList[i].proImage);
             }
 
-            LoadingDialog.getInstance().hideDialog();
+            //LoadingDialog.getInstance().hideDialog();
 
 
 

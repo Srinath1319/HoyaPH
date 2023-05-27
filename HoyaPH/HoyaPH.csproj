@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-ios;net7.0-android</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -15,7 +14,7 @@
 		<ApplicationTitle>HoyaPH</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.hoyaph</ApplicationId>
+		<ApplicationId>com.companyname.hoyaph1</ApplicationId>
 		<ApplicationIdGuid>6492c4d9-1f21-4321-a1a6-9c70e32f1d91</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -28,6 +27,11 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	  <CodesignKey>Apple Development: Created via API (6CR892T445)</CodesignKey>
+	  <CodesignProvision>VS: com.companyname.hoyaph1 Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -49,72 +53,76 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\GalanoGrotesqueLight.otf" />
-	  <None Remove="Resources\Fonts\GalanoGrotesqueMedium.otf" />
-	  <None Remove="Resources\Fonts\GalanoGrotesqueSemiBold.otf" />
-	  <None Remove="Resources\Images\change_lang.png" />
-	  <None Remove="Resources\Images\customer_support.png" />
-	  <None Remove="Resources\Images\earning.png" />
-	  <None Remove="Resources\Images\filter.png" />
-	  <None Remove="Resources\Images\forward_arrow.png" />
-	  <None Remove="Resources\Images\left_arrow.png" />
-	  <None Remove="Resources\Images\login_bg.png" />
-	  <None Remove="Resources\Images\logo.png" />
-	  <None Remove="Resources\Images\logout.png" />
-	  <None Remove="Resources\Images\notifications.png" />
-	  <None Remove="Resources\Images\points.png" />
-	  <None Remove="Resources\Images\pointsexpiry.png" />
-	  <None Remove="Resources\Images\points_bg.png" />
-	  <None Remove="Resources\Images\redeem.png" />
-	  <None Remove="Resources\Images\scan.png" />
-	  <None Remove="Resources\Images\voucher.png" />
+		<None Remove="Resources\Fonts\GalanoGrotesqueLight.otf" />
+		<None Remove="Resources\Fonts\GalanoGrotesqueMedium.otf" />
+		<None Remove="Resources\Fonts\GalanoGrotesqueSemiBold.otf" />
+		<None Remove="Resources\Images\change_lang.png" />
+		<None Remove="Resources\Images\customer_support.png" />
+		<None Remove="Resources\Images\dashboard_bottom_design.png" />
+		<None Remove="Resources\Images\earning.png" />
+		<None Remove="Resources\Images\filter.png" />
+		<None Remove="Resources\Images\forward_arrow.png" />
+		<None Remove="Resources\Images\home.png" />
+		<None Remove="Resources\Images\left_arrow.png" />
+		<None Remove="Resources\Images\login_bg.png" />
+		<None Remove="Resources\Images\logo.png" />
+		<None Remove="Resources\Images\logout.png" />
+		<None Remove="Resources\Images\notifications.png" />
+		<None Remove="Resources\Images\points.png" />
+		<None Remove="Resources\Images\pointsexpiry.png" />
+		<None Remove="Resources\Images\points_bg.png" />
+		<None Remove="Resources\Images\profile.png" />
+		<None Remove="Resources\Images\redeem.png" />
+		<None Remove="Resources\Images\scan.png" />
+		<None Remove="Resources\Images\support.png" />
+		<None Remove="Resources\Images\voucher.png" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-	  <PackageReference Include="PINView.Maui" Version="1.0.0" />
-	  <PackageReference Include="Refit" Version="6.3.2" />
-	  <PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="PINView.Maui" Version="1.0.0" />
+		<PackageReference Include="Refit" Version="6.3.2" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Utils\LoadingDIalog.xaml.cs">
-	    <DependentUpon>LoadingDialog.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Utils\LoadingDIalog.xaml.cs">
+			<DependentUpon>LoadingDialog.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Utils\FilterDialog.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Utils\LoadingDialog.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\DashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\MyEarningPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Utils\FilterDialog.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Utils\LoadingDialog.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\DashboardPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\MyEarningPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
-	  <PackageReference Include="CommunityToolkit.Maui">
-	    <Version>5.1.0</Version>
-	  </PackageReference>
+		<PackageReference Include="CommunityToolkit.Maui">
+			<Version>5.1.0</Version>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
-	  <PackageReference Include="CommunityToolkit.Maui">
-	    <Version>5.0.0</Version>
-	  </PackageReference>
+		<PackageReference Include="CommunityToolkit.Maui">
+			<Version>5.0.0</Version>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
-	  <PackageReference Include="CommunityToolkit.Maui">
-	    <Version>5.0.0</Version>
-	  </PackageReference>
+		<PackageReference Include="CommunityToolkit.Maui">
+			<Version>5.0.0</Version>
+		</PackageReference>
 	</ItemGroup>
 
 </Project>

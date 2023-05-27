@@ -21,7 +21,7 @@ namespace HoyaPH.ViewModels
         
         public async void getMyEarningDetails() {
 
-            LoadingDialog.getInstance().showDialog(App.Current.MainPage);
+            //LoadingDialog.getInstance().showDialog(App.Current.MainPage);
             MyEarningRequest myEarningRequest = new MyEarningRequest { 
                 ActionType = 7,
                 ActiveStatus = 1,
@@ -33,7 +33,7 @@ namespace HoyaPH.ViewModels
             };
 
             var myEarningResponse = await apiRepository.getMyEarningsR(myEarningRequest);
-            LoadingDialog.getInstance().hideDialog();
+            //LoadingDialog.getInstance().hideDialog();
             
             for (int i = 0; i < myEarningResponse.customerBasicInfoListJson.Length; i++)
             {

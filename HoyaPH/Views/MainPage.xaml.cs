@@ -25,11 +25,11 @@ public partial class MainPage : ContentPage
         {
 
             viewModel.OnBackPressed();
-            Preferences.Clear();
+            
             return true;
         }
         else {
-            Preferences.Clear();
+            
             return base.OnBackButtonPressed();
 
         }
